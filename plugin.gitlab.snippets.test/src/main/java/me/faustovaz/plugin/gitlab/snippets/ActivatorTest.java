@@ -1,9 +1,11 @@
-package me.faustovaz.plugin.gitlab.snippets.core;
+package me.faustovaz.plugin.gitlab.snippets;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import me.faustovaz.plugin.gitlab.snippets.Activator;
 
 /**
 * Sample integration test. In Eclipse, right-click > Run As > JUnit-Plugin. <br/>

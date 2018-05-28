@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: plugin.gitlab.snippets Core Plugin
 Bundle-SymbolicName: plugin.gitlab.snippets.core;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-Activator: me.faustovaz.plugin.gitlab.snippets.core.Activator
+Bundle-Activator: me.faustovaz.plugin.gitlab.snippets.GitlabPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  me.faustovaz.plugin.gitlab.snippets.mavendeps
