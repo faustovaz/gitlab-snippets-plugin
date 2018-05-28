@@ -20,7 +20,7 @@ import me.faustovaz.plugin.gitlab.wizard.page.CreateSnippetWizardPage;
 
 public class CreateSnippetWizard extends Wizard implements INewWizard {
 
-    public static final String ID = "me.faustovaz.eclipse.gitlab.plugin.wizard.snippet.create";
+    public static final String ID = "me.faustovaz.plugin.gitlab.wizard.snippet.create";
 
     private CreateSnippetWizardPage page;
     private Snippet snippet;

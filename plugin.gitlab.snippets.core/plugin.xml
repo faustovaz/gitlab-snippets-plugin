@@ -1,54 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Gitlab"
+            id="me.faustovaz.plugin.gitlab.view.snippets">
+      </category>
+      <view
+            name="Snippets"
+            inject="true"
+            icon="icons/gitlab.png"
+            category="me.faustovaz.plugin.gitlab.view.snippets"
+            class="me.faustovaz.plugin.gitlab.view.snippet"
+            id="me.faustovaz.eclipse.gitlab.plugin.view.SnippetsView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="me.faustovaz.plugin.gitlab.view.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         id="me.faustovaz.plugin.gitlab.view.preferences"
+         name="Gitlab"
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="me.faustovaz.plugin.gitlab.view.preferences.PreferencesView"
+            id="me.faustovaz.plugin.gitlab.view.PreferencesView"
+            name="Gitlab Plugin Settings">
+      </page>
+      <page
+            category="me.faustovaz.plugin.gitlab.view.PreferencesView"
+            class="me.faustovaz.plugin.gitlab.view.preferences.filter.SnippetFilterPreferencesView"
+            id="me.faustovaz.plugin.gitlab.view.preferences.SnippetFilterPreferencesView"
+            name="Snippets Filter Settings">
+      </page>
+   </extension>
    <extension
          point="org.eclipse.ui.commands">
-      <category
-            name="sample category"
-            id="category.sample.id">
-      </category>
       <command
-            name="sample command"
-            categoryId="category.sample.id"
-            id="command.sample.id">
+            id="me.faustovaz.plugin.gitlab.snippet.command.createSnippet"
+            name="Create snippet">
       </command>
    </extension>
-
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            commandId="command.sample.id"
-            class="me.faustovaz.plugin.gitlab.snippets.core.SampleHandler">
+            class="me.faustovaz.plugin.gitlab.action.snippet.handler.CreateSnippetHandler"
+            commandId="me.faustovaz.plugin.gitlab.snippet.command.createSnippet">
       </handler>
    </extension>
-
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            allPopups="false"
-            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
-         <menu
-               id="menu.sample.id"
-               label="Sample &amp;Menu">
-            <command
-                  commandId="command.sample.id"
-                  mnemonic="S"
-                  id="command.sample.menu.memonic.id">
-            </command>
-         </menu>
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <separator
+               name="plugin.gitlab.snippet.view.separator"
+               visible="true">
+         </separator>
+         <command
+               commandId="me.faustovaz.eclipse.gitlab.plugin.command.createSnippet"
+               icon="icons/gitlab.png"
+               id="me.faustovaz.eclipse.gitlab.plugin.command.menu.createSnippet"
+               label="Create Gitlab Snippet"
+               tooltip="Create a new Gitlab Snippet">
+            <visibleWhen
+                  checkEnabled="false">
+            </visibleWhen>
+         </command>
+         <separator
+               name="plugin.gitlab.snippet.view.separator2"
+               visible="true">
+         </separator>
       </menuContribution>
-      <menuContribution
-            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-         <toolbar
-               id="toolbar.sample.id">
-            <command
-                  commandId="command.sample.id"
-                  icon="icons/sample.gif"
-                  tooltip="&amp;sample Sample Action"
-                  id="sampleAction.id">
-            </command>
-         </toolbar>
-      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            canFinishEarly="true"
+            category="me.faustovaz.plugin.gitlab.snippet.wizardCategory"
+            class="me.faustovaz.plugin.gitlab.wizard.snippet.CreateSnippetWizard"
+            hasPages="true"
+            icon="icons/gitlab.png"
+            id="me.faustovaz.plugin.gitlab.wizard.snippet.create"
+            name="New Gitlab Snippet">
+      </wizard>
+      <category
+            id="me.faustovaz.plugin.gitlab.snippet.wizardCategory"
+            name="Gitlab">
+      </category>
    </extension>
 
 </plugin>

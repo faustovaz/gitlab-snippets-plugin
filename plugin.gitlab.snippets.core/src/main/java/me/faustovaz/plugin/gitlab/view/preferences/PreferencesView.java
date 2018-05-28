@@ -15,7 +15,7 @@ import org.eclipse.ui.IWorkbench;
 
 public class PreferencesView extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-    public static final String ID = "me.faustovaz.eclipse.gitlab.plugin.view.PreferencesView";
+    public static final String ID = "me.faustovaz.plugin.gitlab.view.PreferencesView";
     private StringFieldEditor url;
     private StringFieldEditor token;
 

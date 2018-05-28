@@ -8,7 +8,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  me.faustovaz.plugin.gitlab.snippets.mavendeps,
  org.eclipse.ui.ide;bundle-version="3.13.1",
- org.eclipse.core.resources;bundle-version="3.12.0"
+ org.eclipse.core.resources;bundle-version="3.12.0",
+ org.eclipse.jface.text;bundle-version="3.12.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: plugin.gitlab.snippets.core
