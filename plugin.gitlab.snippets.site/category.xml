@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/plugin.gitlab.snippets.feature_0.0.0.jar" id="plugin.gitlab.snippets.feature" version="0.0.0">
+    <category name="plugin.gitlab.snippets"/>
+   </feature>
+   <feature url="features/plugin.gitlab.snippets.feature.source_0.0.0.jar" id="plugin.gitlab.snippets.feature.source" version="0.0.0">
+    <category name="plugin.gitlab.snippets Developer Resources"/>
+   </feature>
+</site>
