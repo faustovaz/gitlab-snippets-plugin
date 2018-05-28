@@ -15,7 +15,7 @@ import me.faustovaz.plugin.gitlab.view.preferences.PreferenceConstants;
 public class GitlabPlugin extends AbstractUIPlugin {
 
     // The plug-in ID
-    public static final String PLUGIN_ID = "me.faustovaz.eclipse.gitlab.plugin"; //$NON-NLS-1$
+    public static final String PLUGIN_ID = "me.faustovaz.plugin.gitlab.snippets"; //$NON-NLS-1$
 
     // The shared instance
     private static GitlabPlugin plugin;

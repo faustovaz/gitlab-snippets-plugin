@@ -31,16 +31,16 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
+import org.gitlab4j.api.GitLabApiException;
+import org.gitlab4j.api.models.Snippet;
 
-import api.gitlab.wrapper.exception.GitlabApiException;
-import api.gitlab.wrapper.model.GitlabSnippet;
-import me.faustovaz.eclipse.gitlab.plugin.GitlabPlugin;
-import me.faustovaz.eclipse.gitlab.plugin.action.delegate.RefreshSnippetsActionDelegate;
-import me.faustovaz.eclipse.gitlab.plugin.action.snippet.RefreshSnippetsAction;
-import me.faustovaz.eclipse.gitlab.plugin.view.IGitlabPluginView;
-import me.faustovaz.eclipse.gitlab.plugin.view.preferences.PreferenceConstants;
-import me.faustovaz.eclipse.gitlab.plugin.view.preferences.filter.FileFilterPreferencesUtils;
-import me.faustovaz.eclipse.gitlab.plugin.view.snippet.editor.StringEditorInput;
+import me.faustovaz.plugin.gitlab.action.delegate.RefreshSnippetsActionDelegate;
+import me.faustovaz.plugin.gitlab.action.snippet.RefreshSnippetsAction;
+import me.faustovaz.plugin.gitlab.snippets.GitlabPlugin;
+import me.faustovaz.plugin.gitlab.view.IGitlabPluginView;
+import me.faustovaz.plugin.gitlab.view.preferences.PreferenceConstants;
+import me.faustovaz.plugin.gitlab.view.preferences.filter.FileFilterPreferencesUtils;
+import me.faustovaz.plugin.gitlab.view.snippet.editor.StringEditorInput;
 
 public class SnippetsView extends ViewPart implements IGitlabPluginView {
 
@@ -75,7 +75,7 @@ public class SnippetsView extends ViewPart implements IGitlabPluginView {
                 createSingleLineTableWith(viewer, "Please inform Gitlab Url and Access Token in the Gitlab Preferences",
                         false);
             } else {
-                List<GitlabSnippet> snippets = GitlabPlugin.gitlabAPI().snippets().allSnippets();
+                List<Snippet> snippets = GitlabPlugin.gitlabAPI().getSnippetApi().getSnippets(true);
                 snippets = applyFileFilterPreferences(snippets);
                 if (snippets.isEmpty())
                     createSingleLineTableWith(viewer, "No snippets to show", false);
@@ -88,7 +88,7 @@ public class SnippetsView extends ViewPart implements IGitlabPluginView {
                     viewer.getTable().setLinesVisible(true);
                 }
             }
-        } catch (GitlabApiException e) {
+        } catch (GitLabApiException e) {
             createSingleLineTableWith(viewer, e.getMessage(), true);
         } catch (MalformedURLException badUrl) {
             createSingleLineTableWith(viewer, badUrl.getMessage(), true);
@@ -169,11 +169,11 @@ public class SnippetsView extends ViewPart implements IGitlabPluginView {
                     if (deleteIt) {
                         int selectedIndex = viewer.getTable().getSelectionIndex();
                         TableItem item = viewer.getTable().getItem(selectedIndex);
-                        GitlabSnippet snippet = (GitlabSnippet) item.getData();
-                        GitlabPlugin.gitlabAPI().snippets().remove(snippet);
+                        Snippet snippet = (Snippet) item.getData();
+                        GitlabPlugin.gitlabAPI().getSnippetApi().deleteSnippet(snippet.getId());;
                         refreshContent();
                     }
-                } catch (GitlabApiException error) {
+                } catch (GitLabApiException error) {
                     MessageDialog.openError(viewer.getControl().getShell(), "Snippets Error",
                             "Error: " + error.getMessage());
                 } catch (MalformedURLException badUrl) {
@@ -197,7 +197,7 @@ public class SnippetsView extends ViewPart implements IGitlabPluginView {
             public void widgetSelected(SelectionEvent event) {
                 int selected = viewer.getTable().getSelectionIndex();
                 TableItem item = viewer.getTable().getItem(selected);
-                GitlabSnippet snippet = (GitlabSnippet) item.getData();
+                Snippet snippet = (Snippet) item.getData();
                 openEditorForContentOf(snippet);
             }
 
@@ -207,13 +207,17 @@ public class SnippetsView extends ViewPart implements IGitlabPluginView {
         });
     }
 
-    private void openEditorForContentOf(GitlabSnippet snippet) {
+    private void openEditorForContentOf(Snippet snippet) {
         try {
             IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
-            IEditorDescriptor editor = workbench.getEditorRegistry().getDefaultEditor(snippet.file_name);
-            if (editor == null)
+            IEditorDescriptor editor = workbench.getEditorRegistry().getDefaultEditor(snippet.getFileName());
+            
+            if (editor == null) {
                 editor = workbench.getEditorRegistry().findEditor("org.eclipse.ui.DefaultTextEditor");
-            page.openEditor(new StringEditorInput(snippet.file_name, snippet.content), editor.getId());
+            }
+            
+            page.openEditor(new StringEditorInput(snippet.getFileName(), snippet.getContent()), editor.getId());
+           
         } catch (PartInitException e) {
             e.printStackTrace();
         }
@@ -225,7 +229,7 @@ public class SnippetsView extends ViewPart implements IGitlabPluginView {
             public void doubleClick(DoubleClickEvent event) {
                 int selected = viewer.getTable().getSelectionIndex();
                 TableItem item = viewer.getTable().getItem(selected);
-                GitlabSnippet snippet = (GitlabSnippet) item.getData();
+                Snippet snippet = (Snippet) item.getData();
                 openEditorForContentOf(snippet);
             }
         });
@@ -262,15 +266,16 @@ public class SnippetsView extends ViewPart implements IGitlabPluginView {
         });
     }
 
-    protected List<GitlabSnippet> applyFileFilterPreferences(List<GitlabSnippet> snippets) {
+    protected List<Snippet> applyFileFilterPreferences(List<Snippet> snippets) {
         String preference = GitlabPlugin.getStoredValue(PreferenceConstants.P_GITLAB_SNIPPET_FILTER);
         if (!FileFilterPreferencesUtils.isToIncludeAllFiles(preference)) {
             List<String> filetypes = FileFilterPreferencesUtils.parse(preference);
-            List<GitlabSnippet> filteredSnippets = new ArrayList<>();
+            List<Snippet> filteredSnippets = new ArrayList<>();
             for (String filetype : filetypes) {
                 filteredSnippets.addAll(
-                        snippets.stream().filter(snippet -> !filetype.isEmpty() && snippet.file_name.endsWith(filetype))
-                                .collect(Collectors.toList()));
+                        snippets.stream().filter(
+                                    snippet -> !filetype.isEmpty() && snippet.getFileName().endsWith(filetype))
+                                    .collect(Collectors.toList()));
             }
             return filteredSnippets;
         }

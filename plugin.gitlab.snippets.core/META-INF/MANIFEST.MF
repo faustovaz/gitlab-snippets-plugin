@@ -6,7 +6,9 @@ Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: me.faustovaz.plugin.gitlab.snippets.GitlabPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- me.faustovaz.plugin.gitlab.snippets.mavendeps
+ me.faustovaz.plugin.gitlab.snippets.mavendeps,
+ org.eclipse.ui.ide;bundle-version="3.13.1",
+ org.eclipse.core.resources;bundle-version="3.12.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: plugin.gitlab.snippets.core
