@@ -24,9 +24,9 @@
 
   <repositories>
     <repository>
-      <id>neon</id>
+      <id>eclipse-oxygen</id>
       <layout>p2</layout>
-      <url>http://download.eclipse.org/releases/neon</url>
+      <url>http://download.eclipse.org/releases/oxygen/</url>
     </repository>
   </repositories>
   <build>
@@ -44,7 +44,7 @@
         <configuration>
           <resolver>p2</resolver>
           <pomDependencies>consider</pomDependencies>
-          <ignoreTychoRepositories>true</ignoreTychoRepositories>
+          <ignoreTychoRepositories>false</ignoreTychoRepositories>
         </configuration>
       </plugin>
       <plugin>

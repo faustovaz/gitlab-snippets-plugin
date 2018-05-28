@@ -10,4 +10,13 @@
   <packaging>eclipse-plugin</packaging>
   <name>plugin.gitlab.snippets :: core</name>
   <description>plugin.gitlab.snippets Core Plugin</description>
+  
+  <dependencies>
+    <dependency>
+        <groupId>me.faustovaz</groupId>
+        <artifactId>plugin.gitlab.snippets.mavendeps</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+  
 </project>

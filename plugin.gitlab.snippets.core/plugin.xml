@@ -13,7 +13,7 @@
             inject="true"
             icon="icons/gitlab.png"
             category="me.faustovaz.plugin.gitlab.view.snippets"
-            class="me.faustovaz.plugin.gitlab.view.snippet"
+            class="me.faustovaz.plugin.gitlab.view.snippet.SnippetsView"
             id="me.faustovaz.eclipse.gitlab.plugin.view.SnippetsView">
       </view>
    </extension>

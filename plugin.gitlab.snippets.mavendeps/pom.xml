@@ -4,7 +4,7 @@
 
     <groupId>me.faustovaz</groupId>
     <artifactId>plugin.gitlab.snippets.mavendeps</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <packaging>bundle</packaging>
 
@@ -22,6 +22,7 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
+                <version>3.5.0</version>
 
                 <configuration>
                     <instructions>
