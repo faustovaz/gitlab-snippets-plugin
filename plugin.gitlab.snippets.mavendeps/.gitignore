@@ -1,6 +1,7 @@
 /bin
 /target
-/.settings
-/.project
+.settings
+.project
 /src
+.classpath
 
