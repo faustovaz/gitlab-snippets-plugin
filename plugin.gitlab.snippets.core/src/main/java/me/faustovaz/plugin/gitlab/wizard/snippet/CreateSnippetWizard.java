@@ -13,6 +13,7 @@ import org.eclipse.ui.PlatformUI;
 import org.gitlab4j.api.GitLabApi;
 import org.gitlab4j.api.GitLabApiException;
 import org.gitlab4j.api.models.Snippet;
+import org.gitlab4j.api.models.Visibility;
 
 import me.faustovaz.plugin.gitlab.snippets.GitlabPlugin;
 import me.faustovaz.plugin.gitlab.view.snippet.SnippetsView;
@@ -77,7 +78,7 @@ public class CreateSnippetWizard extends Wizard implements INewWizard {
 
     public Snippet getSnippet() {
         if (snippet == null)
-            snippet = new Snippet();
+            snippet = new Snippet("", "", "");
         return snippet;
     }
 
