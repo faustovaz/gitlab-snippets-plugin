@@ -68,9 +68,9 @@
                visible="true">
          </separator>
          <command
-               commandId="me.faustovaz.eclipse.gitlab.plugin.command.createSnippet"
+               commandId="me.faustovaz.plugin.gitlab.snippet.command.createSnippet"
                icon="icons/gitlab.png"
-               id="me.faustovaz.eclipse.gitlab.plugin.command.menu.createSnippet"
+               id="me.faustovaz.plugin.gitlab.snippet.command.menu.createSnippet"
                label="Create Gitlab Snippet"
                tooltip="Create a new Gitlab Snippet">
             <visibleWhen

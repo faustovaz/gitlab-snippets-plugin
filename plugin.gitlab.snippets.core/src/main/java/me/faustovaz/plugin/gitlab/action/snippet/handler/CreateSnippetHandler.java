@@ -34,7 +34,7 @@ public class CreateSnippetHandler implements IHandler {
     public Object execute(ExecutionEvent event) throws ExecutionException {
         IWorkbench workbench = PlatformUI.getWorkbench();
         IWizardDescriptor wizard = workbench.getNewWizardRegistry()
-                .findWizard("plugin.gitlab.snippet.wizard.snippet.create");
+                .findWizard(CreateSnippetWizard.ID);
         try {
             IWorkbenchWizard createdWizard = wizard.createWizard();
             CustomWizardDialog wizardDialog = new CustomWizardDialog(workbench.getDisplay().getActiveShell(),
