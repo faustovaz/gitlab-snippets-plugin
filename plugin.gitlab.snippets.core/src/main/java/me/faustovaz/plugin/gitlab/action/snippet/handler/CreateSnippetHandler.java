@@ -63,9 +63,13 @@ public class CreateSnippetHandler implements IHandler {
 
     @Override
     public boolean isEnabled() {
-        ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
-                .getSelection();
-        return selection instanceof ITextSelection;
+        ISelection selection = PlatformUI.getWorkbench()
+                .getActiveWorkbenchWindow().getSelectionService().getSelection();
+        if (selection instanceof ITextSelection) {
+           String textSelection = ((ITextSelection) selection).getText();
+           return (textSelection != null) && (!textSelection.isEmpty());
+        }
+        return false;
     }
 
     @Override
