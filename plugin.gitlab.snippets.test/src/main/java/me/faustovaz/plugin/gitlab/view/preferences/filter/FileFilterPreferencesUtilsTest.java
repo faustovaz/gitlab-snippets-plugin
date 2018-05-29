@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 import org.junit.Test;
 
-public class FileFilterPreferencesUtilsTests {
+public class FileFilterPreferencesUtilsTest {
     @Test
     public void givenAStarItShouldIncludedAllFiles() {
         assertTrue(FileFilterPreferencesUtils.isToIncludeAllFiles("*"));

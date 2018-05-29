@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.gitlab4j.api.models.Snippet;
 import org.junit.Test;
 
-public class SnippetUtilsTests {
+public class SnippetUtilsTest {
 
     @Test
     public void fileTypeShouldBeBlankIfFileNameNotSpecified() {
