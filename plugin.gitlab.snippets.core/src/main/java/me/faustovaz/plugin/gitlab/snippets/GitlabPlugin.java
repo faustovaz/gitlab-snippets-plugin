@@ -72,15 +72,16 @@ public class GitlabPlugin extends AbstractUIPlugin {
     }
 
     public static GitLabApi gitlabAPI() throws MalformedURLException {
-        if (api == null)
+        if (api == null) {
             api = new GitLabApi(getStoredValue(PreferenceConstants.P_GITLAB_URL),
                     getStoredValue(PreferenceConstants.P_GITLAB_TOKEN));
+            api.setIgnoreCertificateErrors(true);
+        }
         return api;
     }
 
     public static GitLabApi newAPI() throws MalformedURLException {
-        api = new GitLabApi(getStoredValue(PreferenceConstants.P_GITLAB_URL),
-                getStoredValue(PreferenceConstants.P_GITLAB_TOKEN));
+        api = null;
         return gitlabAPI();
     }
 
