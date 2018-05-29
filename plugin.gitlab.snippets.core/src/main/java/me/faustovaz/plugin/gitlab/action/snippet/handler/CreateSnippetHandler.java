@@ -17,6 +17,7 @@ import org.eclipse.ui.wizards.IWizardDescriptor;
 import org.gitlab4j.api.models.Snippet;
 
 import me.faustovaz.plugin.gitlab.wizard.CustomWizardDialog;
+import me.faustovaz.plugin.gitlab.wizard.snippet.CreateSnippetWizard;
 
 public class CreateSnippetHandler implements IHandler {
 
