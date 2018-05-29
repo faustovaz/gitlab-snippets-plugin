@@ -13,7 +13,6 @@ import org.eclipse.ui.PlatformUI;
 import org.gitlab4j.api.GitLabApi;
 import org.gitlab4j.api.GitLabApiException;
 import org.gitlab4j.api.models.Snippet;
-import org.gitlab4j.api.models.Visibility;
 
 import me.faustovaz.plugin.gitlab.snippets.GitlabPlugin;
 import me.faustovaz.plugin.gitlab.view.snippet.SnippetsView;
