@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature url="features/plugin.gitlab.snippets.feature_0.0.0.jar" id="plugin.gitlab.snippets.feature" version="0.0.0">
-    <category name="plugin.gitlab.snippets"/>
+      <category name="plugin.gitlab.snippets"/>
    </feature>
    <feature url="features/plugin.gitlab.snippets.feature.source_0.0.0.jar" id="plugin.gitlab.snippets.feature.source" version="0.0.0">
-    <category name="plugin.gitlab.snippets Developer Resources"/>
+      <category name="plugin.gitlab.snippets Developer Resources"/>
    </feature>
+   <feature url="features/plugin.gitlab.snippets.feature_0.0.1.qualifier.jar" id="plugin.gitlab.snippets.feature" version="0.0.1.qualifier">
+      <category name="plugin-gitlab-snippets-plugin"/>
+   </feature>
+   <category-def name="plugin-gitlab-snippets-plugin" label="Gitlab Snippets Plugin">
+      <description>
+         Gitlab Snippets Plugin Releases
+      </description>
+   </category-def>
 </site>
