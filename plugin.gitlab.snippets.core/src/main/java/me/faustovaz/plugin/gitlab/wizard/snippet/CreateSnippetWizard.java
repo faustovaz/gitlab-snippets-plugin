@@ -40,7 +40,7 @@ public class CreateSnippetWizard extends Wizard implements INewWizard {
             GitLabApi gitlabAPI = GitlabPlugin.gitlabAPI();
 
             gitlabAPI.getSnippetApi().createSnippet(pageSnippet.getTitle(), pageSnippet.getFileName(),
-                    pageSnippet.getContent(), pageSnippet.getVisibility(), pageSnippet.getContent());
+                    pageSnippet.getContent(), pageSnippet.getVisibility(), pageSnippet.getDescription());
 
             IViewPart view = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
                     .showView(SnippetsView.ID);
