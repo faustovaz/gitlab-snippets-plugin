@@ -1,4 +1,4 @@
-# Eclipse Plugin for Gitlab Snippets
+# Gitlab Snippets Eclipse Plugin
 
 This project is built using [Eclipse Tycho](https://www.eclipse.org/tycho/),
 [Maven](http://maven.apache.org/download.html) and the
